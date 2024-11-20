@@ -99,9 +99,22 @@ Here, it's obvious that there are no $\beta$ value that make this equation true.
 
  Let w =(1,1,0,0),x = (1,0,1,0),y = (0,0,1,1), and z = (0,1,0,1).
 
+Part a : 
 ![exercice 2 Part 3 a](images\Ex2\Ex2Part3_a.jpeg)
 
 So : 
 
 $$\mathbf{u} \in \text{span}\{\mathbf{w}, \mathbf{x}, \mathbf{y}, \mathbf{z}\} \iff a = 4$$
-$$\mathbf{u} \notin \text{span}\{\mathbf{w}, \mathbf{x}, \mathbf{y}, \mathbf{z}\} \iff a \neq 4
+$$\mathbf{u} \notin \text{span}\{\mathbf{w}, \mathbf{x}, \mathbf{y}, \mathbf{z}\} \iff a \neq 4$$
+
+---
+Part b
+
+---
+
+Part c : 
+![exercice 2 Part 3 c](images\Ex2\Ex2Part3_c.jpeg)
+
+$$\mathbb{c}_1\mathbb{w} + \mathbb{c}_2\mathbb{x} + \mathbb{c}_3\mathbb{y} = \mathbb{z} \iff \mathbb{c}_1 = 1, \mathbb{c}_2 = -1, \mathbb{c}_3 = 1$$
+
+Since there exist an answer other than having all $\mathbb{c}$ to 0, the set $\set{w,x,y,z}$ is linearly dependent
