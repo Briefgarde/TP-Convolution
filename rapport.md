@@ -1,11 +1,11 @@
 # TP-2 : Linear algebra with matrices and vectors
 
 ## Ex 1
-### Part 1 : 
+### Part 1 : Practice with Numbers
 If my writing is too bad to read, please reach out to me, and I'll happily clarify everything !
 Problem 1 to 7 : 
 ![Ex1 Part1 1-7](images\Ex2\Ex1Part1_1-7.jpeg)
-### Part 2
+### Part 2 : Matrix type
 1. Square matrix
    1. A square matrix has the same number of columns as it has of rows. 
 2. Column matrix
@@ -15,6 +15,7 @@ Problem 1 to 7 :
 4. Identity matrix
    1. The identity matrix has its diagonal element all at 1 (when n = m), and the rest of its element at 0 (when n =/= m). It is **always** square. 
    2. In a way, it is a sort of permuation matrix.
+   3. If we multiply it with another vector, we get the vector itself. 
 5. Diagonal matrix
    1. The diagonal matrix is similar to the identity matrix, but inversed : when n=m (its diagonal), the element is any number but 0. When not, the number is 0.
 6. symmetric matrix
@@ -28,6 +29,18 @@ Problem 1 to 7 :
    2. The diagonal itself can be any number.
 9.  Lower triangular matrix
     1.  A lower triangular matrix is a matrixe where the element above (when n<m) the diagonal are all 0. 
+
+### Part 3 : Some matrix Operations
+
+For
+
+1. $\frac{1}{n} \mathbf{1}\mathbf{1}^{\mathrm{T}}$
+   
+   This result in a matrix with dimension nxn, assuming that the 1-vectors have n instances, where all elements are $\frac{1}{n}$
+
+2. $\frac{1}{n} \mathbf{1}\mathbf{1}^{\mathrm{T}}X$
+   
+   Here, we're doing a multiplication between one nxn matrix and one nxk matrix. This result in a new nxk matrix, where the elements are...
 
 
 ## Ex-2
@@ -109,7 +122,9 @@ $$\mathbf{u} \notin \text{span}\{\mathbf{w}, \mathbf{x}, \mathbf{y}, \mathbf{z}\
 
 ---
 Part b
-
+![exercice 2 Part 3 b](images\Ex2\Ex2Part3_b.jpeg)
+So : 
+$$\{\alpha, \gamma, \delta\} = \{-1, -1, 1\}$$
 ---
 
 Part c : 
