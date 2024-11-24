@@ -132,4 +132,67 @@ Part c :
 
 $$\mathbb{c}_1\mathbb{w} + \mathbb{c}_2\mathbb{x} + \mathbb{c}_3\mathbb{y} = \mathbb{z} \iff \mathbb{c}_1 = 1, \mathbb{c}_2 = -1, \mathbb{c}_3 = 1$$
 
-Since there exist an answer other than having all $\mathbb{c}$ to 0, the set $\set{w,x,y,z}$ is linearly dependent
+Since there exist an answer other than having all $\mathbb{c}$ to 0, the set $\set{w,x,y,z}$ is linearly dependent.
+
+---
+
+### Part 4
+
+![exercice 2 Part 4](images\Ex2\Ex2Part4.jpeg)
+
+$\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}$ are linearly dependent when $\lambda = \{ 0, -\sqrt{2}, \sqrt{2} \}.$
+
+### Part 5
+
+![Ex2 part 5](images\Ex2\Ex2Part5.jpeg)
+
+Set $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\}$ is a basis for $\mathbb{R^3}$ when $\mathbb{c}\neq -2$
+
+### Part 6
+
+![Ex2 part 6](images\Ex2\Ex2Part6.jpeg)
+
+Set $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\}$ is a basis for $\mathbb{R^3}$ when $\mathbb{c}\neq -3$
+
+
+### Part 7
+
+![Ex2 part 7](images\Ex2\Ex2Part7.jpeg)
+
+In the basis of $\set{x,y,z}$, $\mathbb{w}$ can be exprimed as $\left( \frac{3}{2}, -\frac{1}{2}, \frac{1}{2} \right)$
+
+### Part 8
+First part, converting to orthonormal basis : 
+![Ex2 part 8 a](images\Ex2\Ex2Part8_a.jpeg)
+
+So : 
+
+$$
+\mathbf{x}' = \begin{bmatrix}
+\frac{1}{\sqrt{3}} \\
+\frac{1}{\sqrt{3}} \\
+\frac{1}{\sqrt{3}}
+\end{bmatrix}, \quad
+\mathbf{y}' = \begin{bmatrix}
+\frac{-1}{\sqrt{2}} \\
+\frac{1}{\sqrt{2}} \\
+0
+\end{bmatrix}, \quad
+\mathbf{z}' = \begin{bmatrix}
+\frac{1}{\sqrt{6}} \\
+\frac{1}{\sqrt{6}} \\
+-\frac{2}{\sqrt{6}}
+\end{bmatrix}.
+$$
+
+Second part : find w using the orthonormal basis. 
+Since we computed the ortonormal basis, we can find the coef to $\mathbb{w}$ by simply taking the dot product between $\mathbb{w}$ and $\mathbb{x'}$, and do so for the rest for the vectors as well. The product is the coef for $\mathbb{x'}$ to multiply it to obtain $\mathbb{w}$.
+
+![Ex2 part 8 b](images\Ex2\Ex2Part8_b.jpeg)
+
+So : 
+$$
+\mathbf{w} = a'_1 \mathbf{x}' + a'_2 \mathbf{y}' + a'_3 \mathbf{z}' \iff \set{a'_1,a'_2,a'_3} = \set{\frac{5}{\sqrt{3}}, -\sqrt{2}, \sqrt{\frac{2}{3}}}
+$$
+
+
