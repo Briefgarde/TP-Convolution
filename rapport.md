@@ -287,4 +287,18 @@ $$
 \mathbf{w} = a'_1 \mathbf{x}' + a'_2 \mathbf{y}' + a'_3 \mathbf{z}' \iff \set{a'_1,a'_2,a'_3} = \set{\frac{5}{\sqrt{3}}, -\sqrt{2}, \sqrt{\frac{2}{3}}}
 $$
 
+## 3 : Convolution
 
+### Part 1 : 1D signal
+
+
+1. The function conv1d, takes several arguments: x, kernel, padding, stride, please define each of this terms and how they are used in the convolution.
+   1. x is the signal itself, a timeserie of some sort where every element after the first has some ties to its precedent element, be it simply because it is the one of the day/hour/etc... after, or because the value is based on some operation done on the precedent value. In essence, it's a 1-d vector with n instance. 
+   2. The kernel can be thought of as some sort of function. It takes a vector in input (all the values of the time serie that can fit given the current position of the cursor i and the current center of the kernel) and produce a scalar in output, which, in this case, is the sum of all the element in input divided by 5. 
+   3. The padding is something that can be used to add some element to the base timeserie to avoid the problem that arise when the entire kernel can not be fitted in the timeserie yet. This happen at the start and at the end of the unpadded timeserie, when the elements that would be the window, given the current position of i, are less than kernel_len. Without padding, this may cause trouble with out of bound error or incorrect values. 
+   4. The stride is by how much we move the cursor i every time. It has a few effects : first, it changes the size of the result like this : len(result) = len(signal)/stride. As the stride augment, the effect that the kernel applies is made more apparent. 
+2. What can you say about the kernel we choose to apply to the time series? If the time series is the evolution of a stock price, then what is the convolution doing?
+   1. We applied a kernel like this : $[1/5, 1/5, 1/5, 1/5, 1/5]$, which will take an input of its size and take the dot product to produce a scalar. Here, with this kernel, it means that the input values are summed and divided by 5. 
+   2. If this was the evolution of the stock price, it would mean that the value at the current position of i would be smoothed out based on the values of the 2 next and past days, taking the average values of those 4 days as well as the day at i to produce the new, convoluted value. 
+3. Look at the time series before and after the convolution, are the curves the same? If they aren't, explain the effect of the convolution.
+   1. The curves are not the same, but they are still similar. What has been done to them is that they have been smoothed out, they aren't as jagged as before. This is due because the kernel we designed takes the values of the elements around a given point and averages them out, meaning that, after convolution, the values are all a little bit closer to each other, which is what causes this smoothing effect. 
