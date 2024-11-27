@@ -342,7 +342,7 @@ $$
 
 is a sharpening kernel. It starts off simialr to an edge detection kernel, with a big positive center value surrounded by low negative value. However, the key difference is in the sum of the kernel : if sum = 0, then the kernel is an edge detection kernel. If sum > 0, it's a sharpening kernel. 
 
-In effect, this kernel works the same way as an edge detection kernel. When in a smooth, uniform region, the value of the center pixel gets negated by its neighboors, but because the center is always valued a little bit more than the sum of the neighboors (since the sum > 0), so the final value end up staying close to the original value. 
+In effect, this kernel works the same way as an edge detection kernel. When in a smooth, uniform region, the value of the center pixel gets negated by its neighboors, but because the center is always valued a little bit more than the sum of the neighboors (since the sum > 0), the final value end up staying close to the original value, which preserve the value mostly close to the 
 
 When covering an area with a change in values like an edge, the kernel works the exact same way as an edge detection kernel. 
 
@@ -379,5 +379,69 @@ A gaussian blur kernel is a variant of this that gives more importance to the pi
 The normalization factor ($\frac{1}{256}$) is there to assure that the overall sum of the kernel is 1. This help in making sure than any result from the blurring effect keeps the same general tone, and doesn't suddenly become a lot brighter or darker. 
 
 
+## 4 : Rotation of a 2D dataset. 
 
+The matrix is sourced from [here](https://en.wikipedia.org/wiki/Rotation_matrix#In_two_dimensions).
+
+The intuition to better understand is a video [here](https://www.youtube.com/watch?v=Ta8cKqltPfU)
+
+Explain what you see in the above figure, what does the rotation matrix do to the dataset? Does the distance change between the points in the dataset after a rotation ? If the distance between the points changes, give the formula to compute the new distance.
+
+
+### What does the matrix do to the dataset ? 
+
+Unsurprisingly, what a rotation matrix do to a dataset is pretty self-explanatory : it rotates it by a defined degree (WOAW). 
+
+To understand how it works, let's start with only a single (unit) vector $[1,0]$, on the unit circle. We can imagine rotating it $\theta$ degree counterclockwise, keeping its tail on the origine while its head move $\theta$ along the unit circle. Because its length (or hypothenuse) stay the same (1), we can still compute its coordinates using trigonometry : 
+
+(Note to futur me : if this isn't clear, check the vid, it's way more visual, I can't do picture here.)
+
+$$\cos{\theta} = \frac{x}{hypothenuse} 
+\to \cos{\theta} = x
+$$
+similarly, for the $y$ value of this vector : 
+$$
+\sin{\theta} = \frac{y}{hypothenuse} 
+\to \sin{\theta} = y
+$$
+So 
+$$
+rotated [1,0] = [cos {\theta}, sin{\theta}]
+$$
+
+If we now take a second vector on the unit vector, this time $[0,1]$, and rotate it in the same direction by $\theta$ as well, it's coordinate can once again be obtained via trigonometry : 
+
+$$
+\sin\theta = \frac{x}{hypothenuse} 
+\iff sin\theta = x
+$$
+Though, here, in this case, the value of x is negative. So, it's actually $-sin$
+
+Still, we also have :
+$$
+\cos{\theta} = \frac{y}{hypothenuse} 
+\to \cos{\theta} = y
+$$
+
+So : 
+$$
+rotated[0,1] = [-sin\theta, cos\theta]
+$$
+
+With this setup, we have the rotation function for the two unit vector of a 2D matrix : 
+
+$$
+\begin{bmatrix}
+\cos\theta & -\sin\theta \\
+\sin\theta & \cos\theta
+\end{bmatrix}
+$$
+which is simply the two vector we found earlier, put vertically. And since any vector $[x,y]$ can be thought of as a scaling of the two unit vector, this formula applies to any 2D vector. 
+
+From there, we can apply this to a dataset, thinking of each instance $n$ as its own vector $[x,y]$ to apply the transformation to. 
+
+
+### Does the transformation conserve the distance between points ?
+
+As we've seen in our example, the length (or norm) of a rotated vector was kept through the transformation. Because we apply the tranformation to every $n$ instance through the dataset uniformarly, all their own length stay the same, and they keep poing in the same direction so, the overall position of each points compared to each other stay the same.
 
