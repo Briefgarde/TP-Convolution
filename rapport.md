@@ -48,7 +48,7 @@ For
 
 4. $\left[\mathbf{I} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \right] \mathbf{x}$
    
-   Here, we take out $\frac{1}{n} \mathbf{1}\mathbf{1}^{\mathrm{T}}$ nxn matrix and substract it from the nxn identity matrix $\mathbf{I}$. This result in a new nxn matrix where every element on the diagonal is $1-\frac{1}{n}$, and every other element is $\frac{1}{n}$. 
+   Here, we take our $\frac{1}{n} \mathbf{1}\mathbf{1}^{\mathrm{T}}$ nxn matrix and substract it from the nxn identity matrix $\mathbf{I}$. This result in a new nxn matrix where every element on the diagonal is $1-\frac{1}{n}$, and every other element is $\frac{1}{n}$. 
    
    Then, we multiply the vector $\mathbf{x}$ by this new matrix we just go. This result in a new n-vector $\mathbf{x}'$ where every element is the distance to $\mu_\mathbf{x}$. So, if $\mu_\mathbf{x} = 2$ and $\mathbf{x}_1 = 1$, then $\mathbf{x}'_1 = -1$, because $\mathbf{x}_1$ is one below $\mu_\mathbf{x}$. 
 
@@ -74,7 +74,7 @@ For
 
 8. $\mathbf{1}^\mathrm{T}\mathbf{Mx}$
 
-   This result in 0. We've established earlier that using this $\mathbf{M}$ matrix result in a vector whos mean is centered around 0. When adding all the elements together, we thus get 0. 
+   This result in 0. We've established earlier that using this $\mathbf{M}$ matrix result in a vector whos mean is centered around 0. When adding all the elements together (which is what we do when we take the dot product $\mathbf{1}^\mathrm{T}\mathbf{Mx}$), we thus get 0. 
 
 9. $\mathbf{MM}$
    
@@ -92,11 +92,11 @@ For
     
       Here, we're testing exercise 9 again, but this time with a transposed $\mathbf{M}$ matrix. However, $\mathbf{M}$ is symetric : the element above and below the diagonal are all the same, so transposing it does nothing, functionnaly speaking : $(\mathbf{M})^\mathrm{T} = \mathbf{M}$.
 
-   As such, $(\mathbf{M})^\mathrm{T}(\mathbf{M}) = \mathbf{M}$ still. 
+      As such, $(\mathbf{M})^\mathrm{T}(\mathbf{M}) = \mathbf{M}$ still. 
 
 12. $\mathbf{x}^\mathrm{T}\mathbf{y}$
     
-      This is the formula to take the dot product with two vector. Assuming both vector have the same number of element, this result in a scalar that  is the sum of the element-wise addition of the two vector. 
+      This is the formula to take the dot product with two vector. Assuming both vector have the same number of element, this result in a scalar that  is the sum of the element-wise product of the two vector. 
 
 13. $(\mathbf{M} \mathbf{x})^\top (\mathbf{M} \mathbf{y})$
 
@@ -298,7 +298,86 @@ $$
    3. The padding is something that can be used to add some element to the base timeserie to avoid the problem that arise when the entire kernel can not be fitted in the timeserie yet. This happen at the start and at the end of the unpadded timeserie, when the elements that would be the window, given the current position of i, are less than kernel_len. Without padding, this may cause trouble with out of bound error or incorrect values. 
    4. The stride is by how much we move the cursor i every time. It has a few effects : first, it changes the size of the result like this : len(result) = len(signal)/stride. As the stride augment, the effect that the kernel applies is made more apparent. 
 2. What can you say about the kernel we choose to apply to the time series? If the time series is the evolution of a stock price, then what is the convolution doing?
-   1. We applied a kernel like this : $[1/5, 1/5, 1/5, 1/5, 1/5]$, which will take an input of its size and take the dot product to produce a scalar. Here, with this kernel, it means that the input values are summed and divided by 5. 
-   2. If this was the evolution of the stock price, it would mean that the value at the current position of i would be smoothed out based on the values of the 2 next and past days, taking the average values of those 4 days as well as the day at i to produce the new, convoluted value. 
+   1. We applied a kernel like this : $[1/5, 1/5, 1/5, 1/5, 1/5]$, which will take an input of its same size (5) and take the dot product to produce a scalar. Here, with this kernel, it means that the input values are summed and divided by 5. 
+   2. If this was the evolution of the stock price, it would mean that the value at the current position of i would be smoothed out based on the values of the 2 next and past days, taking the average values of those 4 days as well as the day at i to produce the new, convoluted value. In more economic terms, this become the moving average of the days around it. 
 3. Look at the time series before and after the convolution, are the curves the same? If they aren't, explain the effect of the convolution.
-   1. The curves are not the same, but they are still similar. What has been done to them is that they have been smoothed out, they aren't as jagged as before. This is due because the kernel we designed takes the values of the elements around a given point and averages them out, meaning that, after convolution, the values are all a little bit closer to each other, which is what causes this smoothing effect. 
+   1. The curves are not the same, but they are still similar. What has been done to them is that they have been smoothed out, they aren't as jagged as before. This is because the kernel we designed takes the values of the elements around a given point and averages them out, meaning that, after convolution, the values are all a little bit closer to each other, which is what causes this smoothing effect. 
+
+
+### Part 2 : 2D convolution. 
+
+In 2D convolution, the easiest way to think about it is with an image, as an image is, after all, just a matrix of pixel (as long as it's in grayscale). Then, our kernel is also a matrix, but its function is still the same. For a given point $i,j$, the kernel capture all the points around it that fit the kernel (once again, think of the kernel as being centered around the point, and checking which values fits in it), multiplie the values of those points by the value of their element wise "partner" in the kernel, sum all of this up, and that sum is the value of the new, convoluted $i,j$. 
+
+Just like before, the elements in the kernel must all still add up to 1. 
+
+#### First kernel : Edge detection
+
+The first kernel : 
+$$
+\begin{bmatrix}
+-1 & -1 & -1 \\
+-1 & 8 & -1 \\
+-1 & -1 & -1
+\end{bmatrix}
+$$
+
+is an edge detection kernel. It is designed to emphasize areas in an image where there are rapid changes in intensity, which often correspond to edges.
+
+This kernel works by giving a strong, positive weight to the center pixel (8) and subtracting the values of its surrounding neighbors with weights of -1. The result of this operation reflects the difference between the center pixel's grayscale value (intensity) and the average values of its neighboring pixels. When the kernel is applied to an area with little to no change in grayscale values (for example, a flat surface or uniform color), the contributions of the neighbors nearly cancel out the strong central value, leading to a value close to 0, which is black-ish in a greyscale image. When the kernel is applied to an area with a sharp change in grayscale values (for example, a boundary between a dark and a light region), the center pixel’s value will differ significantly from its neighbors. This difference produces a large positive value, which is more white. 
+
+
+#### Second kernel : Sharpening 
+
+The second kernel : 
+
+$$
+\begin{bmatrix}
+0 & 0 & 0 & 0 & 0 \\
+0 & 0 & -1 & 0 & 0 \\
+0 & -1 & 5 & -1 & 0 \\
+0 & 0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 \\
+\end{bmatrix}
+$$
+
+is a sharpening kernel. It starts off simialr to an edge detection kernel, with a big positive center value surrounded by low negative value. However, the key difference is in the sum of the kernel : if sum = 0, then the kernel is an edge detection kernel. If sum > 0, it's a sharpening kernel. 
+
+In effect, this kernel works the same way as an edge detection kernel. When in a smooth, uniform region, the value of the center pixel gets negated by its neighboors, but because the center is always valued a little bit more than the sum of the neighboors (since the sum > 0), so the final value end up staying close to the original value. 
+
+When covering an area with a change in values like an edge, the kernel works the exact same way as an edge detection kernel. 
+
+
+
+#### Third Kernel : Gaussian blur
+
+The kernel
+
+$$
+\frac{1}{256} \cdot
+\begin{bmatrix}
+1 & 4 & 6 & 4 & 1 \\
+4 & 16 & 24 & 16 & 4 \\
+6 & 24 & 36 & 24 & 6 \\
+4 & 16 & 24 & 16 & 4 \\
+1 & 4 & 6 & 4 & 1 \\
+\end{bmatrix}
+$$
+
+is a blurring kernel, more specifically Gaussian blur. All blurring kernel follow the same overall logic : the value of the center pixel become an average of all the pixels surrounding it. At its most basic, all pixel are valued equal with a kernel that looks like this : 
+
+$$
+\frac{1}{9}
+\begin{bmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1
+\end{bmatrix}
+$$
+
+A gaussian blur kernel is a variant of this that gives more importance to the pixels closer to the center and slowly lower the importance for the pixels that are further away, following a Gaussian curve. This is done symetrically. The result on the image is a more natural feeling of blur. 
+
+The normalization factor ($\frac{1}{256}$) is there to assure that the overall sum of the kernel is 1. This help in making sure than any result from the blurring effect keeps the same general tone, and doesn't suddenly become a lot brighter or darker. 
+
+
+
+
