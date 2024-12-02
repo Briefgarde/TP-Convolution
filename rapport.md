@@ -5,6 +5,11 @@
 If my writing is too bad to read, please reach out to me, and I'll happily clarify everything !
 Problem 1 to 7 : 
 ![Ex1 Part1 1-7](images\Ex2\Ex1Part1_1-7.jpeg)
+
+Problem 8 to 14 : 
+![Ex1part 1 8-14](images\Ex2\Ex1Part1_8-end.jpeg)
+
+For exercise 12, I've left it intentionnaly blank. Searching around a bit, we've found that the little "'" symbol  next to a matrix can be a notation for many thing : [transpose](https://en.wikipedia.org/wiki/Transpose#Definition), determinant, 
 ### Part 2 : Matrix type
 1. Square matrix
    1. A square matrix has the same number of columns as it has of rows. 
@@ -40,19 +45,17 @@ For
 
 2. $\frac{1}{n} \mathbf{1}\mathbf{1}^{\mathrm{T}}\mathbf{x}$
    
-   Here, we're doing a multiplication between the nxn matrix $\frac{1}{n} \mathbf{1}\mathbf{1}^{\mathrm{T}}$ and one nx1 vector $x$. This result in a nx1 vector where every every element $x_i$ is the mean of $x$. I'll be calling this vector the constant mean of $\mathbf{x}$. 
+   Here, we're doing a multiplication between the nxn matrix $\frac{1}{n} \mathbf{1}\mathbf{1}^{\mathrm{T}}$ and one nx1 vector $x$. This result in a nx1 vector where every every element $x_i$ is the mean of $x$. 
 
 3. $\mathbf{x} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{x}$
    
    Here, we'll be taking our constant mean of $\mathbf{x}$ vector we computed earlier, and substracting it from the base $\mathbf{x}$. In essence, it means that for each element $\mathbf{x}_i$, we substract $\mu_\mathbf{x}$. This result in a vector nx1 based on $\mathbf{x}$ that has been demeaned, so it has a new mean of 0. 
 
 4. $\left[\mathbf{I} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \right] \mathbf{x}$
-   
-   Here, we take our $\frac{1}{n} \mathbf{1}\mathbf{1}^{\mathrm{T}}$ nxn matrix and substract it from the nxn identity matrix $\mathbf{I}$. This result in a new nxn matrix where every element on the diagonal is $1-\frac{1}{n}$, and every other element is $\frac{1}{n}$. 
-   
-   Then, we multiply the vector $\mathbf{x}$ by this new matrix we just go. This result in a new n-vector $\mathbf{x}'$ where every element is the distance to $\mu_\mathbf{x}$. So, if $\mu_\mathbf{x} = 2$ and $\mathbf{x}_1 = 1$, then $\mathbf{x}'_1 = -1$, because $\mathbf{x}_1$ is one below $\mu_\mathbf{x}$. 
 
-   This vector has a mean of 0, and is also centered around the mean. 
+   This notation is equivalent to the precendant notation, but arrive to the result in a different, arguably more elegant way. First, $\left[\mathbf{I} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \right]$ is called a centering matrix. It is a nxn matrix where every element on the diagonal is $1-\frac{1}{n}$, and every other element is $\frac{1}{n}$. As its name suggest, it center the vector around its mean. 
+   
+   We can think of it this way : the identity matrix $\mathbf{I}$ preserve the vector as it it. $\frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}}$ is a matrix that, when multiplying a vector, turn it into its mean. So, when we're substracting the first by the second (in regard to a vector), we're effectively demeaning the vector.  
 
 5. $\left[\mathbf{I} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \right] \mathbf{1}$
    
@@ -76,13 +79,13 @@ For
 
    This result in 0. We've established earlier that using this $\mathbf{M}$ matrix result in a vector whos mean is centered around 0. When adding all the elements together (which is what we do when we take the dot product $\mathbf{1}^\mathrm{T}\mathbf{Mx}$), we thus get 0. 
 
-9. $\mathbf{MM}$
+9.  $\mathbf{MM}$
    
-   Here, we're doing matrix multiplication of $\mathbf{M}$ with itself. However, one of the property of this matrix is that is is idempotent, meaning once it is applied once, applying it again does nothing. As such, $\mathbf{MM} = \mathbf{M}$. Extrapolating, $\mathbf{MMx} = \mathbf{Mx}$.
+      Here, we're doing matrix multiplication of $\mathbf{M}$ with itself. However, one of the property of this matrix is that is is idempotent, meaning once it is applied once, applying it again does nothing. As such, $\mathbf{MM} = \mathbf{M}$. Extrapolating, $\mathbf{MMx} = \mathbf{Mx}$.
    
-   To understand this, we can think about how, once a vector is projected onto something by the M matrix, re-applying the matrix does not do anything : the vector is already where it needs to be. 
+      To understand this, we can think about how, once a vector is projected onto something by the M matrix, re-applying the matrix does not do anything : the vector is already where it needs to be. 
 
-   This idempotency is a property of all projection Matrix, and is proved [here](https://statproofbook.github.io/P/mlr-idem.html)
+      This idempotency is a property of all projection Matrix, and is proved [here](https://statproofbook.github.io/P/mlr-idem.html)
 
 10. $\mathbf{x}^\mathrm{T}\mathbf{x}$
     
@@ -106,7 +109,7 @@ For
 
       Here, by taking $\mathbf{Mx}$, we've effectively arrived to $(x_i - \mu_x)$. By then taking the dot product between those two centered vector $\mathbf{x}$ and $\mathbf{y}$, we're effectively computing the sum that the part $\sum_{i=1}^n (x_i - \mu_x)(y_i - \mu_y)$ computes. It is a scalar. 
 
-      We still $\frac{1}{n-1}$ to compute the covariance however. 
+      We still need $\frac{1}{n-1}$ to compute the covariance however. 
 
 14. $\frac{1}{n-1}(\mathbf{M} \mathbf{x})^\top (\mathbf{M} \mathbf{y})$
 
@@ -123,7 +126,7 @@ For
       where every $\mathbf{x_i}$ is a column/feature vector. Here, $\mathbf{MX} = \set{\mathbf{Mx_1, Mx_2,..., Mx_k}}$. And we know that $\mathbf{Mx}$ is simply $\mathbf{x}$ demeaned.  
 
 
-16. $\left( MX \right)^\top \left( MX \right)$
+16. $\left( \mathbf{MX} \right)^\top \left( \mathbf{MX} \right)$
 
       Here, we'll be multiplying the demeaned matrix by itself. We've seen that $\mathbf{MX}$ produces a nxk matrix with each column demneaed matrix. Transposing the first part of the formula mean making a kxn ° nxk matrice multiplication, resulting in a final kxk matrice. 
 
@@ -139,7 +142,7 @@ For
 ### Part 1 : Definition of linear dependance
 The definition of linear dependence for a set of vectors can be written as : 
 $$\beta_1 \alpha_1 + \cdots + \beta_k \alpha_k = 0$$
-where $\{\alpha_1, \alpha_2, \dots, \alpha_k\}$ are all n-vectors. In the above notation, the set of vectors $\alpha$ is linearly dependant if there are solutions for the notation to be corret other than by setting all $\beta=0$. 
+where the set of vectors $\alpha$ is linearly dependant if there are solutions for the notation to be corret other than by setting all $\beta=0$. 
 
 ---
 Is $\{0, 0\}$ linearly dependent ? 
@@ -298,7 +301,7 @@ $$
    3. The padding is something that can be used to add some element to the base timeserie to avoid the problem that arise when the entire kernel can not be fitted in the timeserie yet. This happen at the start and at the end of the unpadded timeserie, when the elements that would be the window, given the current position of i, are less than kernel_len. Without padding, this may cause trouble with out of bound error or incorrect values. 
    4. The stride is by how much we move the cursor i every time. It has a few effects : first, it changes the size of the result like this : len(result) = len(signal)/stride. As the stride augment, the effect that the kernel applies is made more apparent. 
 2. What can you say about the kernel we choose to apply to the time series? If the time series is the evolution of a stock price, then what is the convolution doing?
-   1. We applied a kernel like this : $[1/5, 1/5, 1/5, 1/5, 1/5]$, which will take an input of its same size (5) and take the dot product to produce a scalar. Here, with this kernel, it means that the input values are summed and divided by 5. 
+   1. We applied a kernel like this : $[1/5, 1/5, 1/5, 1/5, 1/5]$, which will take an input of its same size (5) and take the dot product to produce a scalar. Here, with this kernel, it means that the input values are summed and divided by 5. In other word, the new, convoluted value is an average of those 5 days. 
    2. If this was the evolution of the stock price, it would mean that the value at the current position of i would be smoothed out based on the values of the 2 next and past days, taking the average values of those 4 days as well as the day at i to produce the new, convoluted value. In more economic terms, this become the moving average of the days around it. 
 3. Look at the time series before and after the convolution, are the curves the same? If they aren't, explain the effect of the convolution.
    1. The curves are not the same, but they are still similar. What has been done to them is that they have been smoothed out, they aren't as jagged as before. This is because the kernel we designed takes the values of the elements around a given point and averages them out, meaning that, after convolution, the values are all a little bit closer to each other, which is what causes this smoothing effect. 
@@ -306,9 +309,7 @@ $$
 
 ### Part 2 : 2D convolution. 
 
-In 2D convolution, the easiest way to think about it is with an image, as an image is, after all, just a matrix of pixel (as long as it's in grayscale). Then, our kernel is also a matrix, but its function is still the same. For a given point $i,j$, the kernel capture all the points around it that fit the kernel (once again, think of the kernel as being centered around the point, and checking which values fits in it), multiplie the values of those points by the value of their element wise "partner" in the kernel, sum all of this up, and that sum is the value of the new, convoluted $i,j$. 
-
-Just like before, the elements in the kernel must all still add up to 1. 
+In 2D convolution, the easiest way to think about it is with an image, as an image is, after all, just a matrix of pixel (as long as it's in grayscale). Then, our kernel is also a matrix, but its function is still the same. For a given point $i,j$, the kernel capture all the points around it that fit the kernel (once again, think of the kernel as being centered around the point, and checking which values fits in it), multiplie the values of those points by the value of their element wise pair in the kernel, sum all of this up, and that sum is the value of the new, convoluted $i,j$ value. 
 
 #### First kernel : Edge detection
 
@@ -323,7 +324,7 @@ $$
 
 is an edge detection kernel. It is designed to emphasize areas in an image where there are rapid changes in intensity, which often correspond to edges.
 
-This kernel works by giving a strong, positive weight to the center pixel (8) and subtracting the values of its surrounding neighbors with weights of -1. The result of this operation reflects the difference between the center pixel's grayscale value (intensity) and the average values of its neighboring pixels. When the kernel is applied to an area with little to no change in grayscale values (for example, a flat surface or uniform color), the contributions of the neighbors nearly cancel out the strong central value, leading to a value close to 0, which is black-ish in a greyscale image. When the kernel is applied to an area with a sharp change in grayscale values (for example, a boundary between a dark and a light region), the center pixel’s value will differ significantly from its neighbors. This difference produces a large positive value, which is more white. 
+This kernel works by giving a strong, positive weight to the center pixel (8) and subtracting the values of its surrounding neighbors with weights of -1. The result of this operation reflects the difference between the center pixel's grayscale value (intensity) and the average values of its neighboring pixels. When the kernel is applied to an area with little to no change in grayscale values (for example, a flat surface or uniform color), the contributions of the neighbors (nearly) cancel out the strong central value, leading to a value close to 0, which is black-ish in a greyscale image. When the kernel is applied to an area with a sharp change in grayscale values (for example, a boundary between a dark and a light region), the center pixel’s value will differ significantly from its neighbors. This difference produces a large positive value, which is more white. 
 
 
 #### Second kernel : Sharpening 
@@ -342,7 +343,7 @@ $$
 
 is a sharpening kernel. It starts off simialr to an edge detection kernel, with a big positive center value surrounded by low negative value. However, the key difference is in the sum of the kernel : if sum = 0, then the kernel is an edge detection kernel. If sum > 0, it's a sharpening kernel. 
 
-In effect, this kernel works the same way as an edge detection kernel. When in a smooth, uniform region, the value of the center pixel gets negated by its neighboors, but because the center is always valued a little bit more than the sum of the neighboors (since the sum > 0), the final value end up staying close to the original value, which preserve the value mostly close to the 
+In effect, this kernel works the same way as an edge detection kernel. When in a smooth, uniform region, the value of the center pixel gets negated by its neighboors, but because the center is always valued a little bit more than the sum of the neighboors (since the sum > 0), the final value end up staying close to the original value, which preserve the value mostly close to the original value. 
 
 When covering an area with a change in values like an edge, the kernel works the exact same way as an edge detection kernel. 
 
@@ -394,7 +395,7 @@ Unsurprisingly, what a rotation matrix do to a dataset is pretty self-explanator
 
 To understand how it works, let's start with only a single (unit) vector $[1,0]$, on the unit circle. We can imagine rotating it $\theta$ degree counterclockwise, keeping its tail on the origine while its head move $\theta$ along the unit circle. Because its length (or hypothenuse) stay the same (1), we can still compute its coordinates using trigonometry : 
 
-(Note to futur me : if this isn't clear, check the vid, it's way more visual, I can't do picture here.)
+(Note to futur me : if this isn't clear, check the vid, it's way more visual, I can't do (good) pictures here.)
 
 $$\cos{\theta} = \frac{x}{hypothenuse} 
 \to \cos{\theta} = x
@@ -443,5 +444,5 @@ From there, we can apply this to a dataset, thinking of each instance $n$ as its
 
 ### Does the transformation conserve the distance between points ?
 
-As we've seen in our example, the length (or norm) of a rotated vector was kept through the transformation. Because we apply the tranformation to every $n$ instance through the dataset uniformarly, all their own length stay the same, and they keep poing in the same direction so, the overall position of each points compared to each other stay the same.
+As we've seen in our example, the length (or norm) of a rotated vector was kept through the transformation. Because we apply the tranformation to every $n$ instance through the dataset uniformarly, all their own length stay the same, and they keep pointing in the same, rotated direction so, the overall position of each points compared to each other stay the same.
 
