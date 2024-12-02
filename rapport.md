@@ -9,31 +9,51 @@ Problem 1 to 7 :
 Problem 8 to 14 : 
 ![Ex1part 1 8-14](images\Ex2\Ex1Part1_8-end.jpeg)
 
-For exercise 12, I've left it intentionnaly blank. Searching around a bit, we've found that the little "'" symbol  next to a matrix can be a notation for many thing : [transpose](https://en.wikipedia.org/wiki/Transpose#Definition), determinant, 
+For exercise 12, I left it blank because I wasn't sure what the ' prime symbol meant, since we hadn't seen that notation in our lessons. I know the rest of the groupe generally assumed it was a transpose, and I share this interpretation, so I'll write the transposed matrix just in case : 
+$$
+\begin{bmatrix}
+2 & 1 \\
+3 & 4 \\
+5 & 6
+\end{bmatrix}'
+=
+\begin{bmatrix}
+2 & 1 \\
+3 & 4 \\
+5 & 6
+\end{bmatrix}^T
+=
+\begin{bmatrix}
+2 & 1 & 5\\
+1 & 4 & 6 
+\end{bmatrix}
+$$
+
 ### Part 2 : Matrix type
 1. Square matrix
    1. A square matrix has the same number of columns as it has of rows. 
 2. Column matrix
-   1. A column matrix has dimension nx1, so it only has one column. It looks vertical => Tall
+   1. A column matrix has dimension nx1, so it only has one column. It is vertical => Tall
 3. Row matrix
    1. A row matrix has dimension 1xm, so it has many columns but only one row => Wide
 4. Identity matrix
-   1. The identity matrix has its diagonal element all at 1 (when n = m), and the rest of its element at 0 (when n =/= m). It is **always** square. 
+   1. The identity matrix has its diagonal element all at 1 (when $n = m$), and the rest of its element at 0 (when $n \neq m$). It is **always** square. 
    2. In a way, it is a sort of permuation matrix.
-   3. If we multiply it with another vector, we get the vector itself. 
+   3. If we multiply it with a vector, we get the vector itself. 
+   4. The identity matrix is a stricter diagonal matrix. 
 5. Diagonal matrix
-   1. The diagonal matrix is similar to the identity matrix, but inversed : when n=m (its diagonal), the element is any number but 0. When not, the number is 0.
+   1. The diagonal matrix has a similar structure to the identity matrix, in a way : when $n=m$ (its diagonal), the element is any number but 0. When not, the number is 0.
 6. symmetric matrix
-   1. A symmetric matrix has a symmetry access along its diagonal (when n=m).
+   1. A symmetric matrix has a symmetry access along its diagonal (when $n=m$). So, the element at $n,m$ is the same then the element at $m,n$ 
 7. Permutation matrix
    1. A permuation matrix is a matrix that has only one 1 per row **AND** per column. 
    2. The rest of the elements are 0. 
    3. It is always square
 8. Upper triangular matrix
-   1. An upper triangular matrix is a matrixe where the element below the diagonal (when n>m) are all 0. 
+   1. An upper triangular matrix is a matrixe where the element below the diagonal (when $n>m$) are all 0. 
    2. The diagonal itself can be any number.
 9.  Lower triangular matrix
-    1.  A lower triangular matrix is a matrixe where the element above (when n<m) the diagonal are all 0. 
+    1.  A lower triangular matrix is a matrixe where the element above (when $n<m$) the diagonal are all 0. 
 
 ### Part 3 : Some matrix Operations
 
@@ -136,6 +156,12 @@ For
       - The off-diagonal entries (when $i \neq j$) represent the sum of the product of deviations from the mean between each pair of columns $i,j$.
       
       If we wanted to get the covariance matrix, we'd need to factor the result by $\frac{1}{n-1}$ : $\frac{1}{n-1}\left( MX \right)^\top \left( MX \right)$. This would result in a symetrical, square, kxk matrix where the diagonal are 1 (since the pair $i,j$ of columns are actually the same thing, and thus have a perfect covariance.), while the other entries would be the covariance between each pair of $i,j$ features. 
+
+Add-on : This serie of exercice doesn't directly give us the variance as per the equation that was mentioned at the start of the exercice. If we wanted to compute the variance of $\mathbf{x}$ like in the formula given, but with vector, we could do this : 
+
+$$
+\sigma_x^2 = \frac{1}{n-1}\|\mathbf{Mx}\|^2
+$$
 
 
 ## Ex-2
