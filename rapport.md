@@ -108,17 +108,19 @@ For
 
 7. $\mathbf{1}^\mathrm{T}\mathbf{x}$
    
-   This result in a scalar that is equal to the sum of all the element of $\mathbf{x}$
+   This result in a scalar that is equal to the sum of all the element of $\mathbf{x}$. 1xn and nx1 => scalar. 
 
 8. $\mathbf{1}^\mathrm{T}\mathbf{Mx}$
 
    This result in 0. We've established earlier that using this $\mathbf{M}$ matrix result in a vector whos mean is centered around 0. When adding all the elements together (which is what we do when we take the dot product $\mathbf{1}^\mathrm{T}\mathbf{Mx}$), we thus get 0. 
 
+   Quick dimension check : $\mathbf{1}^T$ => 1xn. $\mathbf{Mx}$ => nx1. So, scalar. 
+
 9.  $\mathbf{MM}$
    
       Here, we're doing matrix multiplication of $\mathbf{M}$ with itself. However, one of the property of this matrix is that is is idempotent, meaning once it is applied once, applying it again does nothing. As such, $\mathbf{MM} = \mathbf{M}$. Extrapolating, $\mathbf{MMx} = \mathbf{Mx}$.
    
-      To understand this, we can think about how, once a vector is projected onto something by the M matrix, re-applying the matrix does not do anything : the vector is already where it needs to be. 
+      To understand this, we can think about how, once a vector is projected onto something by the $\mathbf{M}$ matrix, re-applying the matrix does not do anything : the vector is already where it needs to be, centered around its mean. Re-centering it would do nothing : it's already centered. 
 
       This idempotency is a property of all projection Matrix, and is proved [here](https://statproofbook.github.io/P/mlr-idem.html)
 
