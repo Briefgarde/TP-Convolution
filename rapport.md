@@ -1,28 +1,29 @@
 # TP-2 : Linear algebra with matrices and vectors
 
+
+Note : I'm aware the PDF version is cumbersome to read because of the image cuts. I couldn't figure out a way to fix this issue. I vastly recommend to open this pdf into VS code and use a previewer to see its content. 
 ## Ex 1
 ### Part 1 : Practice with Numbers
 If my writing is too bad to read, please reach out to me, and I'll happily clarify everything !
 Problem 1 to 7 : 
-![Ex1 Part1 1-7](images\Ex2\Ex1Part1_1-7.jpeg)
+![Ex1 Part1 1-7](images/Ex2/Ex1Part1_1-7.jpeg)
 
 Problem 8 to 14 : 
-![Ex1part 1 8-14](images\Ex2\Ex1Part1_8-end.jpeg)
+![Ex1part 1 8-14](images/Ex2/Ex1Part1_8-end.jpeg)
 
-For exercise 12, I left it blank because I wasn't sure what the ' prime symbol meant, since we hadn't seen that notation in our lessons. I know the rest of the groupe generally assumed it was a transpose, and I share this interpretation, so I'll write the transposed matrix just in case : 
+For exercise 12, I left it blank because I wasn't sure what the ' prime symbol meant at the time, since we hadn't seen that notation in our lessons. I know the rest of the groupe generally assumed it was a transpose, and I share this interpretation, so I'll write the transposed matrix just in case : 
+
 $$
 \begin{bmatrix}
 2 & 1 \\
 3 & 4 \\
 5 & 6
-\end{bmatrix}'
-=
+\end{bmatrix}' = 
 \begin{bmatrix}
 2 & 1 \\
 3 & 4 \\
 5 & 6
-\end{bmatrix}^T
-=
+\end{bmatrix}^T = 
 \begin{bmatrix}
 2 & 1 & 5\\
 1 & 4 & 6 
@@ -38,7 +39,7 @@ $$
    1. A row matrix has dimension 1xm, so it has many columns but only one row => Wide
 4. Identity matrix
    1. The identity matrix has its diagonal element all at 1 (when $n = m$), and the rest of its element at 0 (when $n \neq m$). It is **always** square. 
-   2. In a way, it is a sort of permuation matrix.
+   2. In a way, it is a sort of permuation matrix. It permuts the vector into itself ? 
    3. If we multiply it with a vector, we get the vector itself. 
    4. The identity matrix is a stricter diagonal matrix. 
 5. Diagonal matrix
@@ -52,8 +53,10 @@ $$
 8. Upper triangular matrix
    1. An upper triangular matrix is a matrixe where the element below the diagonal (when $n>m$) are all 0. 
    2. The diagonal itself can be any number.
+   3. The above part can be any number as well. 
 9.  Lower triangular matrix
     1.  A lower triangular matrix is a matrixe where the element above (when $n<m$) the diagonal are all 0. 
+    2.  The elements in the diagonal and below can be any number
 
 ### Part 3 : Some matrix Operations
 
@@ -65,7 +68,7 @@ For
 
 2. $\frac{1}{n} \mathbf{1}\mathbf{1}^{\mathrm{T}}\mathbf{x}$
    
-   Here, we're doing a multiplication between the nxn matrix $\frac{1}{n} \mathbf{1}\mathbf{1}^{\mathrm{T}}$ and one nx1 vector $x$. This result in a nx1 vector where every every element $x_i$ is the mean of $x$. 
+   Here, we're doing a multiplication between the nxn matrix $\frac{1}{n} \mathbf{1}\mathbf{1}^{\mathrm{T}}$ and one nx1 vector $x$. This result in a nx1 vector where every every element $x_i$ is the mean of $\mathbf{x}$, $\mu_x$. 
 
 3. $\mathbf{x} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{x}$
    
@@ -75,13 +78,25 @@ For
 
    This notation is equivalent to the precendant notation, but arrive to the result in a different, arguably more elegant way. First, $\left[\mathbf{I} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \right]$ is called a centering matrix. It is a nxn matrix where every element on the diagonal is $1-\frac{1}{n}$, and every other element is $\frac{1}{n}$. As its name suggest, it center the vector around its mean. 
    
-   We can think of it this way : the identity matrix $\mathbf{I}$ preserve the vector as it it. $\frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}}$ is a matrix that, when multiplying a vector, turn it into its mean. So, when we're substracting the first by the second (in regard to a vector), we're effectively demeaning the vector.  
+   We can think of it this way : the identity matrix $\mathbf{I}$ preserve the vector as it it. $\frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}}$ is a matrix that, when multiplying a vector, turn it into its mean. So, when we distribute the vector $\mathbf{x}$, we arrive to this situation : 
+
+   $$
+   \mathbf{Ix} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{x}
+   $$
+
+   which can be simplified to : 
+
+   $$
+   \mathbf{x} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{x}
+   $$
+
+   Since $\mathbf{Ix = x}$. We've seen that $\frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{x}$ is the mean vector, so we can more clearly see what we're substracting 
 
 5. $\left[\mathbf{I} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \right] \mathbf{1}$
    
    Instead of taking the vector $\mathbf{x}$ here, we use the 1-vector. Because this vector is already constitued by its means (all elements are 1, the mean is 1), the resulting vector $\mathbf{x}'$ is the $\mathbf{0}$-vector. 
 
-   This is the same thing to what we applied in the 4. exercice, except this time the vector was a constant vector. Had we used any other constant vector, we would have also got the $\mathbf{0}$-vector. 
+   This is the same thing to what we applied in the 4. exercice, except this time the vector was a constant vector (a constant vector is one where all its elements are the same). Had we used any other constant vector, we would have also got the $\mathbf{0}$-vector. 
 
 6. $\mathbf{M} = \mathbf{I} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}}$
 
@@ -155,7 +170,7 @@ For
       - The diagonal entries (when $i=j$) represent the sum of squared deviations from the mean for each column $i,j$.
       - The off-diagonal entries (when $i \neq j$) represent the sum of the product of deviations from the mean between each pair of columns $i,j$.
       
-      If we wanted to get the covariance matrix, we'd need to factor the result by $\frac{1}{n-1}$ : $\frac{1}{n-1}\left( MX \right)^\top \left( MX \right)$. This would result in a symetrical, square, kxk matrix where the diagonal are 1 (since the pair $i,j$ of columns are actually the same thing, and thus have a perfect covariance.), while the other entries would be the covariance between each pair of $i,j$ features. 
+      If we wanted to get the covariance matrix, we'd need to factor the result by $\frac{1}{n-1}$ : $\frac{1}{n-1}\left( MX \right)^\top \left( MX \right)$. This would result in a symetrical, square, kxk matrix where the diagonal are 1 (since the pair $i,j$ of row,column are actually the same thing originaly before the transpose, and thus have a perfect covariance.), while the other elements would be the covariance between each pair of $i,j$ features. 
 
 Add-on : This serie of exercice doesn't directly give us the variance as per the equation that was mentioned at the start of the exercice. If we wanted to compute the variance of $\mathbf{x}$ like in the formula given, but with vector, we could do this : 
 
@@ -168,7 +183,7 @@ $$
 ### Part 1 : Definition of linear dependance
 The definition of linear dependence for a set of vectors can be written as : 
 $$\beta_1 \alpha_1 + \cdots + \beta_k \alpha_k = 0$$
-where the set of vectors $\alpha$ is linearly dependant if there are solutions for the notation to be corret other than by setting all $\beta=0$. 
+where the set of vectors $\alpha$ is linearly dependant if there are solutions for the notation to be corret other than by setting all $\beta_i=0$. 
 
 ---
 Is $\{0, 0\}$ linearly dependent ? 
@@ -188,18 +203,18 @@ Are $\{1, 0\}$ and $\{2, 10\}$ linearly dependent ?
 Since $\{2, 10\} = 2 \{1, 5\}$, they are linearly dependent. 
 
 ---
-![exercice c](images\Ex2\Ex2Part1_c.jpeg)
+![exercice c](images/Ex2/Ex2Part1_c.jpeg)
 Note : When checking for linear (in)dependence, we do not need to write the $\vec{0}$ target vector inside of the matrice, because it would always remain 0 no matter what. So, we do not need to build an augmented matrice. The process remain the exact same nonetheless. 
 
 ---
-![exercice d](images\Ex2\Ex2Part1_d.jpeg)
+![exercice d](images/Ex2/Ex2Part1_d.jpeg)
 
 
 ---
 
 ### Part 2 : Définition of linear independence
 
-A set of vector $\alpha$ are linearly independent if the only way to make this equation hold is by setting all $\beta$ to 0 : 
+A set of vector $\alpha$ are linearly independent if the only way to make this equation hold is by setting all $\beta_i$ to 0 : 
 
 $$\beta_1 \alpha_1 + \cdots + \beta_k \alpha_k = 0$$
 
@@ -210,22 +225,22 @@ Ex a) Show that the vectors (1,2) and (3,4) are linearly independent.
 
 For small quantities of small vectors, one easy test is to see if we can obtain one vector by multiplying a set of the others : 
 
-$$\beta_1\begin{bmatrix}
-1 \\2
-
-\end{bmatrix}
-=
+$$
+\beta_1 \begin{bmatrix}
+1 \\
+2
+\end{bmatrix} = 
 -\begin{bmatrix}
 3 \\4
-
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 (Note : this above notation is just the first equation re-written)
 
 Here, it's obvious that there are no $\beta$ value that make this equation true. So, the set of vector is linearly independent. This becomes much harder to do with more, bigger vectors. I'll do the exercice b) with a standard method. 
 
 ---
-![exercice d](images\Ex2\Ex2Part2_b.jpeg)
+![exercice d](images/Ex2/Ex2Part2_b.jpeg)
 
 ---
 
@@ -234,7 +249,7 @@ Here, it's obvious that there are no $\beta$ value that make this equation true.
  Let w =(1,1,0,0),x = (1,0,1,0),y = (0,0,1,1), and z = (0,1,0,1).
 
 Part a : 
-![exercice 2 Part 3 a](images\Ex2\Ex2Part3_a.jpeg)
+![exercice 2 Part 3 a](images/Ex2/Ex2Part3_a.jpeg)
 
 So : 
 
@@ -243,13 +258,16 @@ $$\mathbf{u} \notin \text{span}\{\mathbf{w}, \mathbf{x}, \mathbf{y}, \mathbf{z}\
 
 ---
 Part b
-![exercice 2 Part 3 b](images\Ex2\Ex2Part3_b.jpeg)
+![exercice 2 Part 3 b](images/Ex2/Ex2Part3_b.jpeg)
+
 So : 
-$$\{\alpha, \gamma, \delta\} = \{-1, -1, 1\}$$
+$$
+\{\alpha, \gamma, \delta\} = \{-1, -1, 1\}
+$$
 ---
 
 Part c : 
-![exercice 2 Part 3 c](images\Ex2\Ex2Part3_c.jpeg)
+![exercice 2 Part 3 c](images/Ex2/Ex2Part3_c.jpeg)
 
 $$\mathbb{c}_1\mathbb{w} + \mathbb{c}_2\mathbb{x} + \mathbb{c}_3\mathbb{y} = \mathbb{z} \iff \mathbb{c}_1 = 1, \mathbb{c}_2 = -1, \mathbb{c}_3 = 1$$
 
@@ -259,32 +277,32 @@ Since there exist an answer other than having all $\mathbb{c}$ to 0, the set $\s
 
 ### Part 4
 
-![exercice 2 Part 4](images\Ex2\Ex2Part4.jpeg)
+![exercice 2 Part 4](images/Ex2/Ex2Part4.jpeg)
 
 $\{ \mathbf{u}, \mathbf{v}, \mathbf{w} \}$ are linearly dependent when $\lambda = \{ 0, -\sqrt{2}, \sqrt{2} \}.$
 
 ### Part 5
 
-![Ex2 part 5](images\Ex2\Ex2Part5.jpeg)
+![Ex2 part 5](images/Ex2/Ex2Part5.jpeg)
 
 Set $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\}$ is a basis for $\mathbb{R^3}$ when $\mathbb{c}\neq -2$
 
 ### Part 6
 
-![Ex2 part 6](images\Ex2\Ex2Part6.jpeg)
+![Ex2 part 6](images/Ex2/Ex2Part6.jpeg)
 
 Set $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\}$ is a basis for $\mathbb{R^3}$ when $\mathbb{c}\neq -3$
 
 
 ### Part 7
 
-![Ex2 part 7](images\Ex2\Ex2Part7.jpeg)
+![Ex2 part 7](images/Ex2/Ex2Part7.jpeg)
 
 In the basis of $\set{x,y,z}$, $\mathbb{w}$ can be exprimed as $\left( \frac{3}{2}, -\frac{1}{2}, \frac{1}{2} \right)$
 
 ### Part 8
 First part, converting to orthonormal basis : 
-![Ex2 part 8 a](images\Ex2\Ex2Part8_a.jpeg)
+![Ex2 part 8 a](images/Ex2/Ex2Part8_a.jpeg)
 
 So : 
 
@@ -309,7 +327,7 @@ $$
 Second part : find w using the orthonormal basis. 
 Since we computed the ortonormal basis, we can find the coef to $\mathbb{w}$ by simply taking the dot product between $\mathbb{w}$ and $\mathbb{x'}$, and do so for the rest for the vectors as well. The product is the coef for $\mathbb{x'}$ to multiply it to obtain $\mathbb{w}$.
 
-![Ex2 part 8 b](images\Ex2\Ex2Part8_b.jpeg)
+![Ex2 part 8 b](images/Ex2/Ex2Part8_b.jpeg)
 
 So : 
 $$
@@ -318,16 +336,18 @@ $$
 
 ## 3 : Convolution
 
+(Note for future me : If you forgot what a convolution is, just check [this](https://www.youtube.com/watch?v=KuXjwB4LzSA), it's veryyyyyyy good)
+
 ### Part 1 : 1D signal
 
 
 1. The function conv1d, takes several arguments: x, kernel, padding, stride, please define each of this terms and how they are used in the convolution.
    1. x is the signal itself, a timeserie of some sort where every element after the first has some ties to its precedent element, be it simply because it is the one of the day/hour/etc... after, or because the value is based on some operation done on the precedent value. In essence, it's a 1-d vector with n instance. 
    2. The kernel can be thought of as some sort of function. It takes a vector in input (all the values of the time serie that can fit given the current position of the cursor i and the current center of the kernel) and produce a scalar in output, which, in this case, is the sum of all the element in input divided by 5. 
-   3. The padding is something that can be used to add some element to the base timeserie to avoid the problem that arise when the entire kernel can not be fitted in the timeserie yet. This happen at the start and at the end of the unpadded timeserie, when the elements that would be the window, given the current position of i, are less than kernel_len. Without padding, this may cause trouble with out of bound error or incorrect values. 
-   4. The stride is by how much we move the cursor i every time. It has a few effects : first, it changes the size of the result like this : len(result) = len(signal)/stride. As the stride augment, the effect that the kernel applies is made more apparent. 
+   3. The padding is something that can be used to add some element to the base timeserie to avoid the problem that arise when the entire kernel can not be fitted in the timeserie yet. This happen at the start and at the end of the unpadded timeserie, when the elements that would be the window, given the current position of i, are less than kernel_len. Without padding, this may cause trouble with out of bound error, incorrect values, or may cause the output to be smaller than the base signal. It happens in my base conv1d method, where the signal is 1000 elements long and the output result is 996 elements long.  
+   4. The stride is by how much we move the cursor i every time. It has a few effects : first, it changes the size of the result like this : len(result) = len(signal)/stride. As the stride augment, the effect that the kernel applies is made more apparent. If too big, it may output a completely unpredictable, useless result, especially if stride > kernel_len
 2. What can you say about the kernel we choose to apply to the time series? If the time series is the evolution of a stock price, then what is the convolution doing?
-   1. We applied a kernel like this : $[1/5, 1/5, 1/5, 1/5, 1/5]$, which will take an input of its same size (5) and take the dot product to produce a scalar. Here, with this kernel, it means that the input values are summed and divided by 5. In other word, the new, convoluted value is an average of those 5 days. 
+   1. We applied a kernel like this : $[1/5, 1/5, 1/5, 1/5, 1/5]$, which will take an input of its same size (5) and take the dot product to produce a scalar. Here, with this kernel, it means that the input values are summed and then divided by 5. In other word, the new, convoluted value is an average of those 5 inputs. 
    2. If this was the evolution of the stock price, it would mean that the value at the current position of i would be smoothed out based on the values of the 2 next and past days, taking the average values of those 4 days as well as the day at i to produce the new, convoluted value. In more economic terms, this become the moving average of the days around it. 
 3. Look at the time series before and after the convolution, are the curves the same? If they aren't, explain the effect of the convolution.
    1. The curves are not the same, but they are still similar. What has been done to them is that they have been smoothed out, they aren't as jagged as before. This is because the kernel we designed takes the values of the elements around a given point and averages them out, meaning that, after convolution, the values are all a little bit closer to each other, which is what causes this smoothing effect. 
@@ -335,7 +355,7 @@ $$
 
 ### Part 2 : 2D convolution. 
 
-In 2D convolution, the easiest way to think about it is with an image, as an image is, after all, just a matrix of pixel (as long as it's in grayscale). Then, our kernel is also a matrix, but its function is still the same. For a given point $i,j$, the kernel capture all the points around it that fit the kernel (once again, think of the kernel as being centered around the point, and checking which values fits in it), multiplie the values of those points by the value of their element wise pair in the kernel, sum all of this up, and that sum is the value of the new, convoluted $i,j$ value. 
+In 2D convolution, the easiest way to think about it is with an image, as an image is, after all, just a 2D matrix of pixel (as long as it's in grayscale). Then, our kernel is also a matrix, but its function is still the same. For a given point $i,j$, the kernel capture all the points around it that fit the kernel (once again, think of the kernel as being centered around the point, and checking which values fits in it), multiplie the values of those points by the value of their element wise pair in the kernel, sum all of this up, and that sum is the value of the new, convoluted $i,j$ value. 
 
 #### First kernel : Edge detection
 
@@ -465,10 +485,23 @@ $$
 $$
 which is simply the two vector we found earlier, put vertically. And since any vector $[x,y]$ can be thought of as a scaling of the two unit vector, this formula applies to any 2D vector. 
 
-From there, we can apply this to a dataset, thinking of each instance $n$ as its own vector $[x,y]$ to apply the transformation to. 
+From there, we can apply this to a dataset, thinking of each instance $n$ as its own vector $[x,y]$ to apply the transformation to : 
+
+$$
+\begin{bmatrix}
+\cos\theta & -\sin\theta \\
+\sin\theta & \cos\theta
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+$$
 
 
 ### Does the transformation conserve the distance between points ?
 
 As we've seen in our example, the length (or norm) of a rotated vector was kept through the transformation. Because we apply the tranformation to every $n$ instance through the dataset uniformarly, all their own length stay the same, and they keep pointing in the same, rotated direction so, the overall position of each points compared to each other stay the same.
+
+
 
