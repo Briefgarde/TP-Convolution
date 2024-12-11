@@ -1,7 +1,7 @@
 # TP-2 : Linear algebra with matrices and vectors
 
 
-Note : I'm aware the PDF version is cumbersome to read because of the image cuts. I couldn't figure out a way to fix this issue. I vastly recommend to open this pdf into VS code and use a previewer to see its content. 
+Note : I'm aware the PDF version of the rapport is cumbersome to read because of the image cuts. I couldn't figure out a way to fix this issue. I vastly recommend to open the rapport via the .md file into VS code and use a previewer to see its content over using the PDF, even if its more stable. 
 ## Ex 1
 ### Part 1 : Practice with Numbers
 If my writing is too bad to read, please reach out to me, and I'll happily clarify everything !
@@ -45,7 +45,7 @@ $$
 5. Diagonal matrix
    1. The diagonal matrix has a similar structure to the identity matrix, in a way : when $n=m$ (its diagonal), the element is any number but 0. When not, the number is 0.
 6. symmetric matrix
-   1. A symmetric matrix has a symmetry access along its diagonal (when $n=m$). So, the element at $n,m$ is the same then the element at $m,n$ 
+   1. A symmetric matrix has a symmetry access along its diagonal (when $n=m$). So, the element at $n,m$ is the same than the element at $m,n$ 
 7. Permutation matrix
    1. A permuation matrix is a matrix that has only one 1 per row **AND** per column. 
    2. The rest of the elements are 0. 
@@ -84,25 +84,41 @@ For
    \mathbf{Ix} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{x}
    $$
 
-   which can be simplified to : 
+   which can be simplified to this since $\mathbf{Ix = x}$.: 
 
    $$
    \mathbf{x} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{x}
    $$
 
-   Since $\mathbf{Ix = x}$. We've seen that $\frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{x}$ is the mean vector, so we can more clearly see what we're substracting 
+    We've seen that $\frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{x}$ is the mean vector, so we can more clearly see what we're substracting. And as vector substraction is done element wise, we're doing this $(x_i - \mu_x)$ to each elements of $\mathbf{x}$.    
+
 
 5. $\left[\mathbf{I} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \right] \mathbf{1}$
    
-   Instead of taking the vector $\mathbf{x}$ here, we use the 1-vector. Because this vector is already constitued by its means (all elements are 1, the mean is 1), the resulting vector $\mathbf{x}'$ is the $\mathbf{0}$-vector. 
+   Instead of taking the vector $\mathbf{x}$ here, we use the 1-vector. Because this vector is already constitued by its means (all elements are 1, the mean is 1), the resulting vector $\mathbf{x}'$ is the $\mathbf{0}$-vector. To see more clearly what we're doing : 
 
-   This is the same thing to what we applied in the 4. exercice, except this time the vector was a constant vector (a constant vector is one where all its elements are the same). Had we used any other constant vector, we would have also got the $\mathbf{0}$-vector. 
+   $$
+   \left[\mathbf{I} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \right] \mathbf{1} = \mathbf{I1} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{1} = \mathbf{1} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{1}
+   $$
+
+   Since $\frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{\color{Red} 1}$ is the operation to obtain the mean of the vector in red, and that the mean of every elements of the $\mathbf{1}$-vector (in red) is 1, we arrive in this position :
+
+   $$
+   \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{1} = \mathbf{1}
+   $$ 
+   Thus leading to have this situation : 
+
+   $$
+   \mathbf{1} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}} \mathbf{1} = \mathbf{1} - \mathbf{1} = \mathbf{0}
+   $$
+
+   This is the same thing to what we applied in the 4. exercice, except this time the vector is a constant vector (a constant vector is one where all its elements are the same). Had we used any other constant vector, we would have also got the $\mathbf{0}$-vector. 
 
 6. $\mathbf{M} = \mathbf{I} - \frac{1}{n} \mathbf{1} \mathbf{1}^{\mathrm{T}}$
 
    Here, the matrix $\mathbf{M}$ is the matrix we used in the above 4 and 5 exercice. It has dimension nxn, and its content is : 
    - On the diagonal, all the element are $1-\frac{1}{n}$
-   - On the rest of the element, all the elements are $-\frac{1}{n}$
+   - All the other elements are $-\frac{1}{n}$
    
    We've seen that one of its usage when multiplying a vector is to center it around its mean while preserving its variance. 
 
@@ -114,7 +130,7 @@ For
 
    This result in 0. We've established earlier that using this $\mathbf{M}$ matrix result in a vector whos mean is centered around 0. When adding all the elements together (which is what we do when we take the dot product $\mathbf{1}^\mathrm{T}\mathbf{Mx}$), we thus get 0. 
 
-   Quick dimension check : $\mathbf{1}^T$ => 1xn. $\mathbf{Mx}$ => nx1. So, scalar. 
+   Quick dimension check : $\mathbf{1}^T$ => 1xn. $\mathbf{Mx}$ => nx1. 1xn-nx1=>scalar. $\mathbf{Mx}$ is equal to the question 3 and 4. 
 
 9.  $\mathbf{MM}$
    
@@ -130,9 +146,9 @@ For
 
 11. $(\mathbf{M})^\mathrm{T}(\mathbf{M})$
     
-      Here, we're testing exercise 9 again, but this time with a transposed $\mathbf{M}$ matrix. However, $\mathbf{M}$ is symetric : the element above and below the diagonal are all the same, so transposing it does nothing, functionnaly speaking : $(\mathbf{M})^\mathrm{T} = \mathbf{M}$.
+      Here, we're testing exercise 9 again, but this time with a transposed $\mathbf{M}$ matrix. However, $\mathbf{M}$ is symetric : the element above and below the diagonal are all the same, so transposing it does nothing. Functionnaly speaking : $(\mathbf{M})^\mathrm{T} = \mathbf{M}$.
 
-      As such, $(\mathbf{M})^\mathrm{T}(\mathbf{M}) = \mathbf{M}$ still. 
+      As such, $(\mathbf{M})^\mathrm{T}(\mathbf{M}) = \mathbf{MM} = \mathbf{M}$ still. 
 
 12. $\mathbf{x}^\mathrm{T}\mathbf{y}$
     
@@ -160,14 +176,14 @@ For
 
       We can think of it like that. 
       $$\mathbf{X} = \set{\mathbf{x_1, x_2,..., x_k}}\$$
-      where every $\mathbf{x_i}$ is a column/feature vector. Here, $\mathbf{MX} = \set{\mathbf{Mx_1, Mx_2,..., Mx_k}}$. And we know that $\mathbf{Mx}$ is simply $\mathbf{x}$ demeaned.  
+      where every $\mathbf{x_i}$ is a column/feature vector. Here, $\mathbf{MX} = \set{\mathbf{Mx_1, Mx_2,..., Mx_k}}$. And we know that $\mathbf{Mx_i}$ is simply $\mathbf{x_i}$ demeaned.  
 
 
 16. $\left( \mathbf{MX} \right)^\top \left( \mathbf{MX} \right)$
 
       Here, we'll be multiplying the demeaned matrix by itself. We've seen that $\mathbf{MX}$ produces a nxk matrix with each column demneaed matrix. Transposing the first part of the formula mean making a kxn ° nxk matrice multiplication, resulting in a final kxk matrice. 
 
-      This is close to resulting in the covariance matrix, but it's once again missing that final $\frac{1}{1-n}$ factor to get there. What we have here is a square matrix where each element is the sum of the deviation between each pair of $i,j$ features, where $i,j = 1 ... k$. 
+      This is close to resulting in the covariance matrix, but it's once again missing that final $\frac{1}{1-n}$ factor to get there that would normalize it. What we have here is a square matrix where each element is the sum of the deviation between each pair of $i,j$ features, where $i,j = 1 ... k$. 
 
       - The diagonal entries (when $i=j$) represent the sum of squared deviations from the mean for each column $i,j$.
       - The off-diagonal entries (when $i \neq j$) represent the sum of the product of deviations from the mean between each pair of columns $i,j$.
@@ -504,6 +520,8 @@ $$
 ### Does the transformation conserve the distance between points ?
 
 As we've seen in our example, the length (or norm) of a rotated vector was kept through the transformation. Because we apply the tranformation to every $n$ instance through the dataset uniformarly, all their own length stay the same, and they keep pointing in the same, rotated direction so, the overall position of each points compared to each other stay the same.
+
+In the notebook, the cell before the last one shows how this intuition is true. 
 
 
 
